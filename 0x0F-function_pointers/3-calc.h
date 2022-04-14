@@ -61,5 +61,4 @@ typedef struct op
 } op_t;
 
 
-#endif /*CALC*/
-
+#endif
