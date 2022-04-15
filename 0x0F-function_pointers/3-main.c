@@ -1,30 +1,23 @@
 #include "3-calc.h"
 
 /**
- * get_op_func - should contain the function that selects the correct
- * function to perform the operation asked by the use
- * @s: struct s (int, int)
- * Return: NULL
+ * main - performs simple operations
+ * @argc: argument count
+ * @argv: argument vector
+ * Return: 0 if no errors
  */
-
-int (*get_op_func(char *s))(int, int)
+int main(int argc, char *argv[])
 {
-	op_t ops[] = {
-		{"+", op_add},
-		{"-", op_sub},
-		{"*", op_mul},
-		{"/", op_div},
-		{"%", op_mod},
-		{NULL, NULL}
-	};
-	int i = 0;
+	register int a, b;
+	int (*fptr)(int, int);
 
-	while (i < 5)
-	{
-		if (ops[i].op[0] == s[0])
-			return (ops[i].f);
-		i++;
-	}
-	return (NULL);
+	if (argc != 4)
+		printf("Error\n"), exit(98);
+	fptr = get_op_func(argv[2]);
+	if (!fptr)
+		printf("Error\n"), exit(99);
+	a = atoi(argv[1]);
+	b = atoi(argv[3]);
+	printf("%i\n", fptr(a, b));
+	return (0);
 }
-
