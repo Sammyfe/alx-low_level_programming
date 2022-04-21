@@ -1,19 +1,25 @@
 #include "lists.h"
-#include <stdlib.h>
-
 /**
- * free_list - Frees a list_t list.
- * @head: A pointer to the list_t list.
+ * free_list -  free a list
+ * @head: pointer
+ * Return: void
  */
+
 void free_list(list_t *head)
 {
-	list_t *tmp;
+	list_t *temp;
 
-	while (head != NULL)
+	if (head == NULL)
+		return;
+
+	while (head->next != NULL)
 	{
-		tmp = head->next;
+		temp = head->next;
 		free(head->str);
 		free(head);
-		head = tmp;
+		head = temp;
 	}
+
+	free(head->str);
+	free(head);
 }
